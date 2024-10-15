@@ -5,13 +5,21 @@ import { AntDesign } from '@expo/vector-icons';
 import Container from 'components/Container';
 import { Button } from 'components/Button';
 import { RootStackParamList } from '../navigation';
+import { addToWidget } from 'addToWidget';
 
 type DetailsSreenRouteProp = RouteProp<RootStackParamList, 'Details'>;
 
 export default function DetailsScreen() {
   const params = useRoute<DetailsSreenRouteProp>().params;
 
-  function handleAddWidget() {}
+  function handleAddWidget() {
+    addToWidget({
+      name: params.login,
+      followers: params.followers,
+      following: params.following,
+      reposCount: params.public_repos,
+    });
+  }
 
   function openUrl(url: string) {
     Linking.canOpenURL(url).then((res) => Linking.openURL(url));
